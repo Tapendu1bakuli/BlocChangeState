@@ -57,7 +57,17 @@ class HomeScreen extends StatelessWidget {
                   onChanged: (val) {
                     context.read<PresentationBloc>().add(ToggleSwitch());
                   });
-            })
+            }),
+            BlocBuilder<PresentationBloc,PresentationState>(builder: (context, state){
+              return Container(height: 200,width: 300,color: Colors.red.withOpacity(state.slider),);
+            }
+            ),
+            BlocBuilder<PresentationBloc,PresentationState>(builder: (context, state){
+              return  Slider(value: state.slider, onChanged: (val){
+                context.read<PresentationBloc>().add(SliderEvent(slider: val));
+              });
+            }
+            ),
           ],
         ),
       ),

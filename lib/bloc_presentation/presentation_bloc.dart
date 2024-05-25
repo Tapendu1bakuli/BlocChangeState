@@ -7,6 +7,7 @@ class PresentationBloc extends Bloc<PresentationEvent, PresentationState> {
     on<IncrementCounter>(_increment);
     on<DecrementCounter>(_decrement);
     on<ToggleSwitch>(_toggleSwitch);
+    on<SliderEvent>(_slider);
   }
 void _increment(IncrementCounter event, Emitter<PresentationState> emit){
     emit(state.copyWith(counter: state.counter + 1));
@@ -16,5 +17,8 @@ void _increment(IncrementCounter event, Emitter<PresentationState> emit){
   }
   void _toggleSwitch(ToggleSwitch event, Emitter<PresentationState> emit){
     emit(state.copyWith(toggle: !state.toggle));
+  }
+  void _slider(SliderEvent event, Emitter<PresentationState> emit){
+    emit(state.copyWith(slider: event.slider));
   }
 }

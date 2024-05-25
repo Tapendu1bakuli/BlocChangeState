@@ -3,15 +3,17 @@ import 'package:equatable/equatable.dart';
 class PresentationState extends Equatable{
   final int counter;
   final bool toggle;
-  PresentationState({this.counter = 0,this.toggle = false});
+  final double slider;
+  const PresentationState({this.counter = 0,this.toggle = false,this.slider = 0.9});
 
-  PresentationState copyWith ({int? counter,bool? toggle}){
+  PresentationState copyWith ({int? counter,bool? toggle,double? slider}){
     return PresentationState(
       counter: counter ?? this.counter,
-      toggle: toggle ?? this.toggle
+      toggle: toggle ?? this.toggle,
+        slider: slider ?? this.slider
     );
   }
 
   @override
-  List<Object?> get props => [counter,toggle];
+  List<Object?> get props => [counter,toggle,slider];
 }
