@@ -1,5 +1,9 @@
+import 'package:bloc_state_project1/bloc_presentation/presentation_bloc.dart';
+import 'package:bloc_state_project1/bloc_presentation/presentation_event.dart';
+import 'package:bloc_state_project1/bloc_presentation/presentation_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,16 +16,22 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "1",
-              style: Theme.of(context).textTheme.displayLarge,
+            BlocBuilder<PresentationBloc, PresentationState>(
+              builder: (context, state) {
+                return Text(
+                  state.counter.toString(),
+                  style: Theme.of(context).textTheme.displayLarge,
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 80),
               child: Row(
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<PresentationBloc>().add(DecrementCounter());
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent),
                     child: Text("-",
@@ -29,15 +39,25 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<PresentationBloc>().add(IncrementCounter());
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent),
                     child: Text("+",
                         style: Theme.of(context).textTheme.displayMedium),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
+            BlocBuilder<PresentationBloc, PresentationState>(
+                builder: (context, state) {
+              return Switch(
+                  value: state.toggle,
+                  onChanged: (val) {
+                    context.read<PresentationBloc>().add(ToggleSwitch());
+                  });
+            })
           ],
         ),
       ),

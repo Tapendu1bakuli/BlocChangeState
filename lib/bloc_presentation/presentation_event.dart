@@ -1,4 +1,10 @@
-part of 'presentation_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-@immutable
-sealed class PresentationEvent {}
+abstract class PresentationEvent extends Equatable {
+@override
+ List<Object> get props => [];
+}
+
+class IncrementCounter extends PresentationEvent {}
+class DecrementCounter extends PresentationEvent {}
+class ToggleSwitch extends PresentationEvent {}

@@ -1,6 +1,17 @@
-part of 'presentation_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-@immutable
-sealed class PresentationState {}
+class PresentationState extends Equatable{
+  final int counter;
+  final bool toggle;
+  PresentationState({this.counter = 0,this.toggle = false});
 
-final class PresentationInitial extends PresentationState {}
+  PresentationState copyWith ({int? counter,bool? toggle}){
+    return PresentationState(
+      counter: counter ?? this.counter,
+      toggle: toggle ?? this.toggle
+    );
+  }
+
+  @override
+  List<Object?> get props => [counter,toggle];
+}
